@@ -1,0 +1,116 @@
+﻿@model IEnumerable<Model.EF.Product>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+@section css{
+    <link href="~/Assets/Admin/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <style>
+
+        .img-custom {
+            width: 100px;
+        }
+    </style>
+}
+@section js{
+    <!-- Page level plugins -->
+    <script src="/Assets/Admin/js/productController.js"></script>
+    <script src="~/Assets/Admin/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/Assets/Admin/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+    <!-- Page level custom scripts -->
+    <script src="~/Assets/Admin/js/demo/datatables-demo.js"></script>
+    <script type="text/javascript">
+        function remove() {
+            var $tr = $(this).closest('tr');
+            $tr.remove();
+            location.reload();
+        }
+    </script>
+}
+@section header{
+    Danh sách danh mục sản phẩm
+}
+<p>
+    @Html.ActionLink("Tạo mới", "Create", null, new { @class = "btn btn-success btn-icon-split btn-padding" })
+</p>
+
+<div class="card shadow mb-4">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Title)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Thumb)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Price)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Quantity)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Special)
+                        </th>
+                        <th>#</th>
+                    </tr>
+                </thead>
+                @foreach (var item in Model)
+                {
+                    <tr>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Title)
+                        </td>
+                        <th>
+                            <img class="img-fluid img-custom" src="@Html.DisplayFor(modelItem => item.Thumb)" />
+                        </th>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Price)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Quantity)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Special)
+                        </td>
+                        <td style="display: flex">
+                            <a href="#" class="btn-images btn btn-primary btn-icon-split btn-padding" data-id="@item.ID">Quản lý ảnh</a>
+                            <a class="btn btn-primary btn-icon-split btn-padding" href="/Admin/Products/Edit/@item.ID"><i class="far fa-edit"></i></a> |
+                            <a class="btn btn-danger btn-icon-split btn-padding" data-ajax="true" data-ajax-complete="remove" data-ajax-confirm="Bạn có muốn xoá bản ghi này ?" data-ajax-method="Delete" href="/Admin/Products/Delete/@item.ID"><i class="far fa-trash-alt"></i></a>
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+    </div>
+</div>
+<!-- Large modal -->
+<div id="imageManager" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="imageList">
+
+                </div>
+                <div class="clear"></div>
+                <button type="button" class="btn btn-primary" id="btnChooseImages" style="position: absolute;bottom: -56px;left: 20px;">Chọn ảnh</button>
+                <input type="hidden" id="hidProductID" value="0" />
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" id="btnSaveImages">Lưu</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+            </div>
+        </div>
+
+    </div>
+</div>

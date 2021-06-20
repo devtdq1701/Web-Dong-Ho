@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.1267
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebDongHo", "WebDongHo\WebDongHo.csproj", "{640A7459-FDF2-4485-9D86-E11B6E600FAD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Model", "Model\Model.csproj", "{06815DE6-7FB8-44EB-BE0D-43B13A168AD8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{640A7459-FDF2-4485-9D86-E11B6E600FAD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{640A7459-FDF2-4485-9D86-E11B6E600FAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{640A7459-FDF2-4485-9D86-E11B6E600FAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{640A7459-FDF2-4485-9D86-E11B6E600FAD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{06815DE6-7FB8-44EB-BE0D-43B13A168AD8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{06815DE6-7FB8-44EB-BE0D-43B13A168AD8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{06815DE6-7FB8-44EB-BE0D-43B13A168AD8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{06815DE6-7FB8-44EB-BE0D-43B13A168AD8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1B120DD1-3ED4-42C1-9F63-029580006DD2}
+	EndGlobalSection
+EndGlobal

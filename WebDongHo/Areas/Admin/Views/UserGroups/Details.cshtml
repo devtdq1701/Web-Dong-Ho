@@ -1,0 +1,59 @@
+﻿@model Model.EF.UserGroup
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+@section header{
+    Chi tiết người dùng @Model.Name
+}
+
+    <div>
+        <hr />
+        <table class="table table-striped">
+            <tr>
+                <th scope="row">@Html.DisplayNameFor(model => model.Name)</th>
+                <td>@Html.DisplayFor(model => model.Name)</td>
+            </tr>
+            <tr>
+                <th scope="row">@Html.DisplayNameFor(model => model.Description)</th>
+                <td>@Html.DisplayFor(model => model.Description)</td>
+            </tr>
+            <tr>
+                <th scope="row">@Html.DisplayNameFor(model => model.IsActived)</th>
+                <td>
+                    @{
+                        if (Model.IsActived == true)
+                        {
+                            <span class="badge badge-pill badge-success">Kích hoạt</span>
+                        }
+                        else
+                        {
+                            <span class="badge badge-pill badge-danger">Chưa kích hoạt</span>
+                        }
+                    }
+                </td>
+            </tr>
+            <tr>
+                <th scope="row">@Html.DisplayNameFor(model => model.IsDeleted)</th>
+                <td>
+                    @{
+                        if (Model.IsDeleted == true)
+                        {
+                            <span class="badge badge-pill badge-success">Đã xoá</span>
+                        }
+                        else
+                        {
+                            <span class="badge badge-pill badge-danger">Chưa xoá</span>
+                        }
+                    }
+                </td>
+            </tr>
+        </table>
+        <hr />
+    </div>
+    <p>
+        @Html.ActionLink("Sửa", "Edit", null, new { id = Model.ID }, new { @class = "btn btn-primary btn-icon-split btn-padding" }) |
+        @Html.ActionLink("Trở lại", "Index", null, new { @class = "btn btn-secondary btn-icon-split btn-padding" })
+    </p>

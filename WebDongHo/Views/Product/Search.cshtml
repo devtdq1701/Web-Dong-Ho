@@ -1,0 +1,134 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model IPagedList<Model.EF.Product>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section css{
+    <style>
+        .item:hover .item-price {
+            display: none;
+        }
+
+        .item:hover .item-bottom {
+            display: block !important;
+        }
+    </style>
+}
+@section js{
+    <script>
+        document.querySelector('.custom-select-wrapper').addEventListener('click', function () {
+            this.querySelector('.custom-select').classList.toggle('open');
+        })
+        //for (const option of document.querySelectorAll(".custom-option")) {
+        //    option.addEventListener('click', function () {
+        //        if (!this.classList.contains('selected')) {
+        //            this.parentNode.querySelector('.custom-option.selected').classList.remove('selected');
+        //            this.classList.add('selected');
+        //            this.closest('.custom-select').querySelector('.custom-select__trigger span').textContent = this.textContent;
+        //        }
+        //    })
+        //}
+        window.addEventListener('click', function (e) {
+            const select = document.querySelector('.custom-select')
+            if (!select.contains(e.target)) {
+                select.classList.remove('open');
+            }
+        });
+
+    </script>
+}
+<div id="main" class="theme-clearfix" role="document" style="background: #eee">
+    <div class="breadcrumbs theme-clearfix">
+        <div class="container">
+            <ul class="breadcrumb">
+                <li><a href="/">Trang chủ </a><span class="go-page"></span></li>
+                <li class="active"><span>Sản phẩm</span></li>
+            </ul>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row sidebar-row">
+            <div id="contents" class="content col-lg-12 col-md-12 col-sm-12" role="main">
+                <div id="primary" class="content-area" style="    background: #fff;padding: 20px;border-radius: 5px;">
+                    <main id="main" class="site-main" role="main">
+                        <div class="image-category"><img src="" alt=""></div>
+                        <div class="products-wrapper">
+                            <div class="listing-title">
+                                <h1><span style="font-size:18px; font-weight: 700">Kết quả tìm kiếm: @ViewBag.keyword</span></h1>
+                            </div>
+                            @if (ViewBag.totalRecord > 0)
+                            {
+                                <ul class="products-loop clearfix grid" style="display: flex;">
+                                    @foreach (var item in Model)
+                                    {
+                                        <li class="item col-lg-2 col-md-3 col-sm-4 col-xs-6 post-35364 product type-product status-publish has-post-thumbnail product_cat-xiaomi1 product_tag-mi-watch product_tag-smartwatch-mi-watch product_tag-xiaomi-mi-watch product_tag-xiaomi-smartwatch first instock shipping-taxable purchasable product-type-variable">
+                                            <div class="products-entry clearfix">
+                                                <a href="/chi-tiet/@item.MetaTitle-@item.ID" class="woocommerce-LoopProduct-link woocommerce-loop-product__link"> </a>
+                                                <div class="products-thumb">
+                                                    <a href="/chi-tiet/@item.MetaTitle-@item.ID" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">
+                                                    </a>
+                                                    <a href="/chi-tiet/@item.MetaTitle-@item.ID">
+                                                        <div class="product-thumb-hover"><img width="300" height="300" src="@item.Thumb" class="attachment-shop_catalog size-shop_catalog wp-post-image" alt=""></div>
+                                                    </a>
+                                                </div>
+                                                <div class="products-content">
+                                                    <div class="item-content">
+                                                        <h4><a href="/chi-tiet/@item.MetaTitle-@item.ID" title="@item.Title"> @item.Title </a></h4>
+                                                        <div class="item-price">
+                                                            <span>
+                                                                <span class="woocommerce-Price-amount amount">@item.Price.Value.ToString("N0")&nbsp;<span class="woocommerce-Price-currencySymbol">đ</span></span>
+                                                            </span>
+                                                        </div>
+                                                        @*<div class="desc std">
+                                                                <ul>
+                                                                    <li><span style="color: #ff6600;"><b>PHIÊN BẢN NỘI ĐỊA : WEAR OS (CÓ TIẾNG ANH/ TIẾNG VIỆT)</b></span></li>
+                                                                    <li><span style="color: #008000;"><strong>Hỗ trợ ESIM : Vinaphone, Mobifone, Viettel&nbsp;</strong></span></li>
+                                                                    <li><strong>Tình trạng : Mới 100%</strong></li>
+                                                                    <li><strong>Bảo hành : 3 tháng</strong></li>
+                                                                </ul>
+                                                                <div class="nhom-qua">
+                                                                    <div><i class="fa fa-gift"></i> Khuyến mãi<i class="fa fa-check-circle"></i></div>
+                                                                    <ul class="qua">
+                                                                        <li><i class="fa fa-check-circle"></i>Dán màn hình PPF trị giá 100.000đ</li>
+                                                                        <li><i class="fa fa-check-circle"></i>Miễn phí vận chuyển toàn quốc</li>
+                                                                        <li><i class="fa fa-check-circle"></i>Giảm 100.000đ khi mua 2 sản phẩm</li>
+                                                                        <li><i class="fa fa-check-circle"></i>Trả góp lãi suất 0% qua thẻ tín dụng</li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>*@
+                                                        <div class="item-bottom clearfix">
+                                                            <button class="button product_type_simple add_to_cart_button ajax_add_to_cart" data-id="@item.ID">Thêm vào giỏ hàng</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    }
+                                </ul>
+                                <div class="products-nav">
+                                    <nav class="woocommerce-pagination">
+                                        @*<ul class="page-numbers">
+                                                <li><span aria-current="page" class="page-numbers current">1</span></li>
+                                                <li><a class="page-numbers" href="https://ldstore.vn/xiaomi1/page/2/">2</a></li>
+                                                <li><a class="next page-numbers" href="https://ldstore.vn/xiaomi1/page/2/">→</a></li>
+                                            </ul>*@
+                                        @Html.PagedListPager(Model, page => Url.Action("Index",
+                new { page, keyword=ViewBag.keyword }), PagedListRenderOptions.ClassicPlusFirstAndLast)
+                                    </nav>
+                                </div>
+                            }
+                            else
+                            {
+                                <h2>Không tìm thấy sản phẩm nào</h2>
+                            }
+
+                            <div class="clear"></div>
+                        </div>
+                    </main>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

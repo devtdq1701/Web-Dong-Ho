@@ -1,0 +1,505 @@
+﻿@model Model.EF.Product
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section css {
+    <style>
+        .single_add_to_cart_button {
+            margin-top: 65px;
+            border: none !important;
+            text-indent: 0;
+            width: 100%;
+            height: 50px !important;
+            border-radius: 6px !important;
+            text-transform: uppercase;
+            font-size: 16px;
+            line-height: 50px;
+            background: #f57224 !important;
+            background: -webkit-linear-gradient(#f48340,#f57224) !important;
+            background: -o-linear-gradient(#f48340,#f57224) !important;
+            background: -moz-linear-gradient(#f48340,#f57224) !important;
+            background: linear-gradient(#f48340,#f57224) !important;
+        }
+
+        ul.tabs {
+            margin: 0px;
+            padding: 0px;
+            list-style: none;
+        }
+
+            ul.tabs li {
+                background: none;
+                color: #222;
+                display: inline-block;
+                padding: 10px 15px;
+                cursor: pointer;
+            }
+
+                ul.tabs li.current {
+                    background: #ededed;
+                    color: #222;
+                }
+
+        .panel {
+            display: none;
+            background: #fff;
+            padding: 15px;
+        }
+
+            .panel.current {
+                display: inherit;
+            }
+    </style>
+}
+@section js{
+    <script>
+        var backSlider = '<button type="button" class="slick-prev slick-arrow">Previous</button>';
+        var nextSlider = '<button type="button" class="slick-next slick-arrow">Next</button>';
+        $('.slider-for').slick({
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            arrows: true,
+            prevArrow: backSlider,
+            nextArrow: nextSlider,
+            fade: true,
+            asNavFor: '.slider-nav'
+        });
+        $('.slider-nav').slick({
+            slidesToShow: 3,
+            slidesToScroll: 1,
+            asNavFor: '.slider-for',
+            focusOnSelect: true,
+            arrows: false
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+
+            $('ul.tabs li').click(function () {
+                var tab_id = $(this).attr('data-tab');
+
+                $('ul.tabs li').removeClass('current');
+                $('.panel').removeClass('current');
+
+                $(this).addClass('current');
+                $("#" + tab_id).addClass('current');
+            })
+
+        })
+    </script>
+}
+
+<div id="main" class="theme-clearfix" role="document" style="background: #EFF0F5">
+    <div class="breadcrumbs theme-clearfix">
+        <div class="container">
+            <ul class="breadcrumb">
+                <li><a href="/">Trang chủ </a><span class="go-page"></span></li>
+                <li><a href="/@ViewBag.CategoryName-@ViewBag.CategoryID">@ViewBag.CategoryName</a><span class="go-page"></span></li>
+                <li class="active"><span>@Model.Title</span></li>
+            </ul>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row sidebar-row">
+            <div id="contents-detail" class="content col-lg-12 col-md-12 col-sm-12 col-xs-12" role="main">
+                <div id="primary" class="content-area">
+                    <main id="main" class="site-main" role="main">
+                        <div class="single-product clearfix">
+                            <div class="woocommerce-notices-wrapper"></div>
+                            <div class="post-15462 product type-product status-publish has-post-thumbnail product_cat-xiaomi1 product_tag-amazfit-gts product_tag-huami-amazfit-gts product_tag-huami-amazfit-gts-global product_tag-huami-amazfit-quoc-te product_tag-xiaomi-amazfit-gts product_tag-xiaomi-huami-amazfit-gts first instock sale shipping-taxable purchasable product-type-variable">
+                                <div class="single-product-top" style="padding: 10px;">
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                            <div class="product-img-gallery">
+                                                <div class="woocommerce-product-gallery woocommerce-product-gallery--with-images images product-images" data-vertical="false" data-video="">
+                                                    <figure class="woocommerce-product-gallery__wrapper">
+                                                        <div class="product-images-container clearfix thumbnail-bottom">
+                                                            <div class="slider-for product-responsive">
+                                                                @foreach (var item in ViewBag.Images)
+                                                                {
+                                                                    <div class="woocommerce-product-gallery__image">
+                                                                        <img width="600" height="600" src="@item" class="wp-post-image" alt="" title="amazfit-GTS-global-version-ldstorevn-21 (1)" data-caption="">
+                                                                    </div>
+                                                                }
+
+                                                            </div>
+                                                            <div class="slider-nav product-responsive-thumbnail">
+                                                                
+                                                                @foreach (var item in ViewBag.Images)
+                                                                {
+                                                                <div class="item-thumbnail-product">
+                                                                    <div class="thumbnail-wrapper">
+                                                                        <img width="100" height="100" src="@item" class="attachment-shop_thumbnail size-shop_thumbnail" alt="">
+                                                                    </div>
+                                                                </div>   
+                                                                }
+
+                                                            </div>
+                                                        </div>
+                                                    </figure>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="product-summary content_product_detail col-lg-5 col-md-5 col-sm-12 col-xs-12">
+                                            <h1 class="product_title">@Model.Title</h1>
+                                            <div class="product-description">
+                                                <h2 class="quick-overview">THÔNG TIN THÊM </h2>
+                                                @Html.Raw(Model.MoreDesc)
+                                                <div class="nhom-qua">
+                                                    <div><i class="fa fa-gift"></i> Khuyến mại<i class="fa fa-check-circle"></i></div>
+                                                    @Html.Raw(Model.Gift)
+                                                </div>
+                                            </div>
+                                            <div >
+                                                <p class="price">
+                                                    @if (Model.OldPrice.HasValue)
+                                                    {
+                                                        <del><span class="woocommerce-Price-amount amount">@Model.OldPrice.Value.ToString("N0")&nbsp;<span class="woocommerce-Price-currencySymbol">đ</span></span></del>
+                                                    }
+                                                    <ins><span class="woocommerce-Price-amount amount">@Model.Price.Value.ToString("N0")&nbsp;<span class="woocommerce-Price-currencySymbol">đ</span></span></ins>
+                                                </p>
+                                            </div>
+                                            <div class="product-summary-bottom clearfix">
+                                                <div class="single_variation_wrap" style="">
+                                                    <div class="single_variation"></div>
+                                                    <div class="variations_button">
+                                                        <button class="single_add_to_cart_button" id="single_add_to_cart_button" data-id="@Model.ID">Mua hàng</button>
+                                                    </div>
+                                                </div>
+
+
+                                                <style type="text/css">
+                                                    .label {
+                                                        color: #363636;
+                                                        line-height: 1;
+                                                    }
+
+                                                    .variations_form .variations .value select {
+                                                        -moz-appearance: none;
+                                                        -webkit-appearance: none;
+                                                        background-image: url("https://ldstore.vn/wp-content/plugins/color-and-image-swatches-for-variable-product-attributes/assets/images/drop-down.png");
+                                                        background-color: transparent;
+                                                        background-position: 96% center;
+                                                        background-repeat: no-repeat;
+                                                        border: 2px solid #ccc;
+                                                        border-radius: 5px;
+                                                        cursor: pointer;
+                                                        font-size: 14px;
+                                                        height: auto;
+                                                        margin-bottom: 5px;
+                                                        padding: 8px 25px 8px 10px;
+                                                        width: auto;
+                                                    }
+
+                                                    .variation_buttons_wrapper .variation_button {
+                                                        display: inline-block;
+                                                        vertical-align: top;
+                                                        margin-right: 7px;
+                                                        margin-bottom: 5px;
+                                                    }
+
+                                                    .variations .variation_buttons_wrapper a {
+                                                        text-decoration: none;
+                                                        text-align: center;
+                                                        position: relative;
+                                                    }
+
+                                                        .variations .variation_buttons_wrapper a:focus,
+                                                        .variations .variation_buttons_wrapper a:hover {
+                                                            outline: none;
+                                                            text-decoration: none;
+                                                            box-shadow: none;
+                                                        }
+
+                                                    .variations .variation {
+                                                        margin-bottom: 15px;
+                                                    }
+
+                                                    .select-wrapper {
+                                                        display: none !important;
+                                                    }
+
+                                                    .variation_buttons .variation_button,
+                                                    .variation_buttons .variation_button:hover {
+                                                        box-shadow: none;
+                                                    }
+
+                                                    .variations .variation_buttons_wrapper a span.phoen_swatches img {
+                                                        border-radius: 0px;
+                                                        height: 100%;
+                                                        object-fit: contain;
+                                                        width: 100%;
+                                                    }
+
+                                                    .variations.phoen_sharp_square .variation_buttons_wrapper a span.phoen_swatches,
+                                                    .variations.phoen_sharp_square .variation_buttons_wrapper a span.phoen_swatches img {
+                                                        border-radius: 0px;
+                                                    }
+
+                                                    .variations .variation_buttons_wrapper a .phoen_swatches > img {
+                                                        transition: all 0.5s ease 0s;
+                                                        -webkit-transition: all 0.5s ease 0s;
+                                                        -moz-transition: all 0.5s ease 0s;
+                                                        -ms-transition: all 0.5s ease 0s;
+                                                        -o-transition: all 0.5s ease 0s;
+                                                    }
+                                                    /* tooltip css */
+                                                    .value .variation_buttons_wrapper .variation_button.position_after {
+                                                        vertical-align: bottom;
+                                                        position: relative;
+                                                    }
+
+                                                    .value .variation_buttons_wrapper .variation_button.position_before {
+                                                        vertical-align: top;
+                                                        position: relative;
+                                                    }
+
+                                                    .phoen_tooltip p {
+                                                        position: relative;
+                                                        margin-bottom: 0;
+                                                    }
+
+                                                    span.phoen_swatches span.phoen_tooltip {
+                                                        display: inherit;
+                                                    }
+
+                                                    .phoen_tooltip {
+                                                        border-radius: 0px;
+                                                        font-size: 13px;
+                                                        height: auto;
+                                                        line-height: 1.3;
+                                                        left: 50%;
+                                                        margin-bottom: 10px;
+                                                        opacity: 0;
+                                                        position: absolute;
+                                                        visibility: hidden;
+                                                        width: auto;
+                                                        text-align: center;
+                                                        z-index: 99;
+                                                        transform: translateX(-50%);
+                                                        -webkit-transform: translateX(-50%);
+                                                        -moz-transform: translateX(-50%);
+                                                        transition: all 300ms ease 0s;
+                                                        -webkit-transition: all 300ms ease 0s;
+                                                        -moz-transition: all 300ms ease 0s;
+                                                        margin-top: 0px;
+                                                    }
+
+                                                    span.phoen_tooltip img {
+                                                        border: 1px solid;
+                                                    }
+
+                                                    .variation .variation_button span.phoen_below_radio {
+                                                        display: inline-block;
+                                                        font-size: 13px;
+                                                        line-height: 1;
+                                                        margin: 0 6px 0px 4px;
+                                                        text-transform: capitalize;
+                                                        vertical-align: middle;
+                                                    }
+
+                                                    .phoen_tooltip p {
+                                                        display: inline-block;
+                                                        width: 84px;
+                                                        padding: 7px 10px;
+                                                        text-transform: capitalize;
+                                                        text-align: center;
+                                                        color: #ffffff;
+                                                        background: #222222;
+                                                    }
+
+                                                    .position_before:hover .phoen_tooltip {
+                                                        top: 100%;
+                                                        margin-top: 8px;
+                                                        margin-bottom: 0;
+                                                        visibility: visible;
+                                                        opacity: 1;
+                                                    }
+
+                                                    .phoen_tooltip p::after {
+                                                        border-color: transparent transparent #222222 transparent;
+                                                        border-style: solid;
+                                                        border-width: 6px;
+                                                        content: "";
+                                                        left: 50%;
+                                                        position: absolute;
+                                                        top: inherit;
+                                                        transform: translateX(-50%);
+                                                        -webkit-transform: translateX(-50%);
+                                                        -moz-transform: translateX(-50%);
+                                                        bottom: 100%;
+                                                    }
+
+                                                    .variations .value {
+                                                        display: inline-block;
+                                                        margin-left: 12px;
+                                                    }
+
+                                                    .variations .label {
+                                                        display: inline-block;
+                                                        width: 62px;
+                                                    }
+
+                                                    .variations .value .variation_button.unselected span.phoen_swatches {
+                                                        border: 2px solid #fff;
+                                                        box-shadow: 0 0 0 1px rgba(0,0,0,.3);
+                                                    }
+
+                                                    .variations .value .variation_button.selected span.phoen_swatches {
+                                                        border: #fff solid 2px;
+                                                        box-shadow: 0 0 1px 2px rgba(0,0,0,.9);
+                                                    }
+
+                                                    .variations .variation a.reset_variations {
+                                                        display: block !important;
+                                                        margin-top: 11px;
+                                                        margin-bottom: 18px;
+                                                    }
+                                                </style>
+                                            </div>
+                                            <div class="installment"><a href="tel:0924049999">Trả góp qua thẻ tín dụng<span class="note">Chỉ từ 232.500 đ/tháng. Hotline: 092.404.9999</span></a></div>
+                                        </div>
+                                        <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 general-info">
+                                            <div class="widget-1 widget-first widget text-10 widget_text">
+                                                <div class="widget-inner">
+                                                    <div class="textwidget">
+                                                        <ul class="servies">
+                                                            <li>
+                                                                <i class="far fa-check-square" style="float: left;font-size: 26px;margin-top: 10px;margin-right: 22px;font-weight: 900;"></i><span>
+                                                                    <strong>Cam kết 100%</strong><br>Sản phẩm chính hãng
+                                                                </span>
+                                                            </li>
+                                                            <li>
+                                                                <i class="fa fa-paper-plane"></i><span>
+                                                                    <strong>SHIP COD toàn quốc</strong><br> Nhận hàng thanh toán.
+                                                                </span>
+                                                            </li>
+                                                            <li><i class="fa fa-phone"></i><span><strong>Gọi 0924049999</strong><br>Để hỗ trợ 24/7.</span></li>
+                                                            <li><i class="fa fa-undo"></i><span><strong>Hỗ trợ trả góp 0%</strong><br>qua thẻ tín dụng</span></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="widget-2 widget-last widget text-23 widget_text">
+                                                <div class="widget-inner">
+                                                    <div class="textwidget">
+                                                        <div class="order-other row">
+                                                            <div class="col-sm-12">
+                                                                <div class="order-tel">
+                                                                    <a title="Gọi LD Store" href="tel:0924049999" target="_blank" rel="noopener noreferrer">
+                                                                        Đặt hàng qua điện thoại<br>
+                                                                        092 404 9999
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-12">
+                                                                <div class="order-fb">
+                                                                    <a title="LD Store" href="https://www.facebook.com/ldstore.shop/" target="_blank" rel="noopener noreferrer nofollow" class="external">
+                                                                        Đặt hàng qua facebook<br>
+                                                                        LD Store
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-12">
+                                                                <a title="Video đánh giá smartwatch mới nhất" href="https://www.youtube.com/channel/UCyoQY5n_Q6xoLTxf0g6fPDw?sub_confirmation=1" rel="nofollow" class="external" target="_blank"><img class="wp-image-13533 aligncenter" src="https://ldstore.vn/wp-content/uploads/2020/01/YOUTUBE.png" alt="Video đánh giá smartwatch mới nhất"></a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-9 col-md-8 col-sm-12 col-xs-12 tab-col-9 ">
+                                        <div class="description" style="background: #fff">
+                                            <div class="woocommerce-tabs wc-tabs-wrapper">
+                                                <ul class="tabs">
+                                                    <li class="description_tab current" data-tab="tab-description">
+                                                        Mô tả
+                                                    </li>
+                                                    <li class="additional_information_tab" data-tab="tab-additional_information">
+                                                        Thông tin bổ sung
+                                                    </li>
+                                                </ul>
+                                                <div class="panel entry-content wc-tab current" id="tab-description">
+                                                     @Html.Raw(Model.Detail)
+                                                 </div>
+                                                <div class="panel entry-content wc-tab" id="tab-additional_information">
+                                                    <h2 style="text-align: center">Thông số kỹ thuật</h2>
+                                                    @Html.Raw(Model.Specification)
+                                                </div>
+                                            </div>
+                                            </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-4 col-sm-12 col-xs-12 tab-col-3">
+                                        <div class="carousel slide sw-related-product" style="background: #fff">
+                                            <div class="block-title title1">
+                                                <h2 style="height: 100%; padding: 7px 0; text-align: center">Sản phẩm liên quan</h2>
+
+                                            </div>
+                                            <div class="carousel-inner">
+                                                <div class="item active">
+                                                    <div class="bs-item cf">
+                                                        <div class="bs-item-inner">
+                                                            <div class="item-img"> <a href="https://ldstore.vn/xiaomi-huami-amazfit-gts-2/" title="Xiaomi Huami Amazfit GTS 2"> <img width="100" height="100" src="https://ldstore.vn/wp-content/uploads/2020/09/amazfit-gts2-ldstore-111-100x100.png" class="attachment-shop_thumbnail size-shop_thumbnail wp-post-image" alt="" srcset="https://ldstore.vn/wp-content/uploads/2020/09/amazfit-gts2-ldstore-111-100x100.png 100w, https://ldstore.vn/wp-content/uploads/2020/09/amazfit-gts2-ldstore-111-150x150.png 150w, https://ldstore.vn/wp-content/uploads/2020/09/amazfit-gts2-ldstore-111-300x300.png 300w, https://ldstore.vn/wp-content/uploads/2020/09/amazfit-gts2-ldstore-111-768x768.png 768w, https://ldstore.vn/wp-content/uploads/2020/09/amazfit-gts2-ldstore-111-32x32.png 32w, https://ldstore.vn/wp-content/uploads/2020/09/amazfit-gts2-ldstore-111-600x600.png 600w, https://ldstore.vn/wp-content/uploads/2020/09/amazfit-gts2-ldstore-111.png 800w" sizes="(max-width: 100px) 100vw, 100px"> </a> </div>
+                                                            <div class="item-content">
+                                                                <div class="reviews-content">
+                                                                    <div class="star"></div>
+                                                                </div>
+                                                                <h4><a href="https://ldstore.vn/xiaomi-huami-amazfit-gts-2/" title="Xiaomi Huami Amazfit GTS 2">Xiaomi Huami Amazfit GTS 2</a></h4>
+                                                                <p><span class="woocommerce-Price-amount amount">3.990.000&nbsp;<span class="woocommerce-Price-currencySymbol">đ</span></span></p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="bs-item cf">
+                                                        <div class="bs-item-inner">
+                                                            <div class="item-img"> <a href="https://ldstore.vn/huami-amazfit-neo/" title="Huami Amazfit Neo"> <img width="100" height="100" src="https://ldstore.vn/wp-content/uploads/2020/09/amazfit-neo-ldstore-2-100x100.png" class="attachment-shop_thumbnail size-shop_thumbnail wp-post-image" alt="" srcset="https://ldstore.vn/wp-content/uploads/2020/09/amazfit-neo-ldstore-2-100x100.png 100w, https://ldstore.vn/wp-content/uploads/2020/09/amazfit-neo-ldstore-2-150x150.png 150w, https://ldstore.vn/wp-content/uploads/2020/09/amazfit-neo-ldstore-2-300x300.png 300w, https://ldstore.vn/wp-content/uploads/2020/09/amazfit-neo-ldstore-2-32x32.png 32w, https://ldstore.vn/wp-content/uploads/2020/09/amazfit-neo-ldstore-2.png 450w" sizes="(max-width: 100px) 100vw, 100px"> </a> </div>
+                                                            <div class="item-content">
+                                                                <div class="reviews-content">
+                                                                    <div class="star"></div>
+                                                                </div>
+                                                                <h4><a href="https://ldstore.vn/huami-amazfit-neo/" title="Huami Amazfit Neo">Huami Amazfit Neo</a></h4>
+                                                                <p><span class="woocommerce-Price-amount amount">690.000&nbsp;<span class="woocommerce-Price-currencySymbol">đ</span></span></p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="bs-item cf">
+                                                        <div class="bs-item-inner">
+                                                            <div class="item-img"> <a href="https://ldstore.vn/xiaomi-huami-amazfit-stratos-3-star-wars-edition/" title="Xiaomi Huami Amazfit Stratos 3 Star Wars Edition"> <img width="100" height="100" src="https://ldstore.vn/wp-content/uploads/2020/03/amazfit-stratos-3-starwars-ldstore-12-100x100.png" class="attachment-shop_thumbnail size-shop_thumbnail wp-post-image" alt="" srcset="https://ldstore.vn/wp-content/uploads/2020/03/amazfit-stratos-3-starwars-ldstore-12-100x100.png 100w, https://ldstore.vn/wp-content/uploads/2020/03/amazfit-stratos-3-starwars-ldstore-12-150x150.png 150w, https://ldstore.vn/wp-content/uploads/2020/03/amazfit-stratos-3-starwars-ldstore-12-32x32.png 32w, https://ldstore.vn/wp-content/uploads/2020/03/amazfit-stratos-3-starwars-ldstore-12-300x300.png 300w" sizes="(max-width: 100px) 100vw, 100px"> </a> </div>
+                                                            <div class="item-content">
+                                                                <div class="reviews-content">
+                                                                    <div class="star"></div>
+                                                                </div>
+                                                                <h4><a href="https://ldstore.vn/xiaomi-huami-amazfit-stratos-3-star-wars-edition/" title="Xiaomi Huami Amazfit Stratos 3 Star Wars Edition">Xiaomi Huami Amazfit Stratos 3 Star Wars Edition</a></h4>
+                                                                <p><span class="woocommerce-Price-amount amount">5.890.000&nbsp;<span class="woocommerce-Price-currencySymbol">đ</span></span></p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="bs-item cf">
+                                                        <div class="bs-item-inner">
+                                                            <div class="item-img"> <a href="https://ldstore.vn/xiaomi-huami-amazfit-stratos-3-global-version/" title="Xiaomi Huami Amazfit Stratos 3 Phiên bản quốc tế"> <img width="100" height="100" src="https://ldstore.vn/wp-content/uploads/2019/09/huami-amazfit-stratos-3-ldstore-11-100x100.jpg" class="attachment-shop_thumbnail size-shop_thumbnail wp-post-image" alt="" srcset="https://ldstore.vn/wp-content/uploads/2019/09/huami-amazfit-stratos-3-ldstore-11-100x100.jpg 100w, https://ldstore.vn/wp-content/uploads/2019/09/huami-amazfit-stratos-3-ldstore-11-150x150.jpg 150w, https://ldstore.vn/wp-content/uploads/2019/09/huami-amazfit-stratos-3-ldstore-11-300x300.jpg 300w, https://ldstore.vn/wp-content/uploads/2019/09/huami-amazfit-stratos-3-ldstore-11-768x768.jpg 768w, https://ldstore.vn/wp-content/uploads/2019/09/huami-amazfit-stratos-3-ldstore-11-32x32.jpg 32w, https://ldstore.vn/wp-content/uploads/2019/09/huami-amazfit-stratos-3-ldstore-11-600x600.jpg 600w, https://ldstore.vn/wp-content/uploads/2019/09/huami-amazfit-stratos-3-ldstore-11.jpg 800w" sizes="(max-width: 100px) 100vw, 100px"> </a> </div>
+                                                            <div class="item-content">
+                                                                <div class="reviews-content">
+                                                                    <div class="star"></div>
+                                                                </div>
+                                                                <h4><a href="https://ldstore.vn/xiaomi-huami-amazfit-stratos-3-global-version/" title="Xiaomi Huami Amazfit Stratos 3 Phiên bản quốc tế">Xiaomi Huami Amazfit Stratos 3 Phiên bản quốc tế</a></h4>
+                                                                <p><del><span class="woocommerce-Price-amount amount">4.990.000&nbsp;<span class="woocommerce-Price-currencySymbol">đ</span></span></del> <ins><span class="woocommerce-Price-amount amount">4.190.000&nbsp;<span class="woocommerce-Price-currencySymbol">đ</span></span></ins></p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </main>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

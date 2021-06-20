@@ -1,0 +1,18 @@
+﻿@model List<Model.EF.Slide>
+<div class="vc_row-full-width vc_clearfix"></div>
+<div data-vc-full-width="true" data-vc-full-width-init="true" class="vc_row wpb_row vc_row-fluid vc_custom_1502190690519" style="position: relative; left: -159.6px; box-sizing: border-box; width: 1519px; padding-left: 159.6px; padding-right: 159.4px;">
+    <div class="wpb_column vc_column_container vc_col-sm-12">
+        <div class="vc_column-inner">
+            <div class="wpb_wrapper" style="height: 400px">
+                <div class="header_banner">
+                    @foreach (var item in Model)
+                    {
+                        <a style="border: none!important;padding:0" href="@item.Link">
+                            <img src="@item.Images" />
+                        </a>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

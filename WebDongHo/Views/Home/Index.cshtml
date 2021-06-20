@@ -1,0 +1,77 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section css{
+    <style>
+        .item:hover .item-price {
+            display: none;
+        }
+        .item:hover .add-info {
+            display: block;
+        }
+
+    </style>
+}
+@section storeInfo{
+    <div id="main" class="theme-clearfix" role="document">
+        <div class="breadcrumbs theme-clearfix" style="display:none">
+            <div class="container">
+                <ul class="breadcrumb">
+                    <li class="active"><span>Trang chủ </span></li>
+                </ul>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row sidebar-row">
+                <div id="contents" role="main" class="main-page  col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="single post-8761 page type-page status-publish hentry">
+                        <div class="entry">
+                            <div class="entry-content">
+                                <div class="entry-summary">
+                                    <div class="vc_row-full-width vc_clearfix"></div>
+                                    <div data-vc-full-width="true" data-vc-full-width-init="true" class="vc_row wpb_row vc_row-fluid vc_custom_1562259477931 vc_row-has-fill vc_row-o-content-middle vc_row-flex" style="position: relative; left: -159.6px; box-sizing: border-box; width: 1519px; padding-left: 159.6px; padding-right: 159.4px;">
+                                        <div class="wpb_column vc_column_container vc_col-sm-6">
+                                            <div class="vc_column-inner">
+                                                <div class="wpb_wrapper">
+                                                    <div class="wpb_text_column wpb_content_element ">
+                                                        <div class="wpb_wrapper">
+                                                            <p style="text-align: left; font-size: 13px; padding: 8px 0px;"><span style="color: #333;"><strong>Địa chỉ: 157 Trần Quốc Hoàn – Cầu Giấy – TP. Hà Nội</strong></span> | <a href="https://go.masoffer.net/moyuqz" rel="nofollow" class="external" target="_blank"><strong style="color: #f26511;">Shopee</strong></a> | <a href="https://go.masoffer.net/moRzys" rel="nofollow" class="external" target="_blank"><strong style="color: #e0524f;">Lazada</strong></a></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="wpb_column vc_column_container vc_col-sm-6">
+                                            <div class="vc_column-inner">
+                                                <div class="wpb_wrapper">
+                                                    <div class="wpb_text_column wpb_content_element ">
+                                                        <div class="wpb_wrapper">
+                                                            <p style="text-align: right; font-size: 13px; padding: 8px 0px;"><span style="color: #333;"><strong>Giờ làm việc: T2-T7: 09:00-20:00 | Chủ nhật: 09:00-18:00</strong></span></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="vc_row-full-width vc_clearfix"></div>
+}
+
+
+@section banner{
+    @{Html.RenderAction("Banner", "Home"); }
+}
+@section productSlider{
+    @{Html.RenderAction("GarminCategory", "Home"); }
+</div>
+</div>
+<div class="vc_row-full-width vc_clearfix"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+}
+

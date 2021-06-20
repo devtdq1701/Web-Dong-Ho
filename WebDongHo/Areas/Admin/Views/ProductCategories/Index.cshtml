@@ -1,0 +1,100 @@
+﻿@model IEnumerable<Model.EF.ProductCategory>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+@section css{
+    <link href="~/Assets/Admin/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <style>
+
+        .img-custom {
+            width: 100px;
+        }
+    </style>
+}
+@section js{
+    <!-- Page level plugins -->
+    <script src="~/Assets/Admin/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/Assets/Admin/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+    <!-- Page level custom scripts -->
+    <script src="~/Assets/Admin/js/demo/datatables-demo.js"></script>
+    <script type="text/javascript">
+        function remove() {
+            var $tr = $(this).closest('tr');
+            $tr.remove();
+            location.reload();
+        }
+    </script>
+}
+@section header{
+    Danh sách danh mục sản phẩm
+}
+<p>
+    @Html.ActionLink("Tạo mới", "Create", null, new { @class = "btn btn-success btn-icon-split btn-padding" })
+</p>
+<div class="card shadow mb-4">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Title)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Images)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Status)
+                        </th>
+                        <th>Thao tác</th>
+                    </tr>
+                <thead>
+                <tfoot>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Title)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Images)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Status)
+                        </th>
+                        <th>Thao tác</th>
+                    </tr>
+                </tfoot>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            <a href="/Admin/ProductCategories/Details/@item.ID">@Html.DisplayFor(modelItem => item.Title)</a>
+                        </td>
+                        <td>
+                            <img class="img-fluid img-custom" src="@Html.DisplayFor(modelItem => item.Images)" alt="">
+                        </td>
+                        <th>
+                            @{
+                                if (item.Status == true)
+                                {
+                                    <span class="badge badge-pill badge-success">Kích hoạt</span>
+                                }
+                                else
+                                {
+                                    <span class="badge badge-pill badge-danger">Huỷ kích hoạt</span>
+                                }
+                            }
+
+                        </th>
+                        <td style="display:flex">
+                            @*@Html.ActionLink("Sửa", "Edit", new { id = item.ID }, new { @class = "btn btn-primary btn-icon-split btn-padding" }) |
+                                @Ajax.ActionLink("Xoá", "Delete", new { @id = item.ID }, new AjaxOptions { Confirm = "Bạn có muốn xoá bản ghi này ?", OnComplete = "remove", HttpMethod = "Delete" }, new { @class = "btn btn-danger btn-icon-split btn-padding" })*@
+                            <a class="btn btn-primary btn-icon-split btn-padding" href="/Admin/ProductCategories/Edit/@item.ID"><i class="far fa-edit"></i></a> |
+                            <a class="btn btn-danger btn-icon-split btn-padding" data-ajax="true" data-ajax-complete="remove" data-ajax-confirm="Bạn có muốn xoá bản ghi này ?" data-ajax-method="Delete" href="/Admin/ProductCategories/Delete/@item.ID"><i class="far fa-trash-alt"></i></a>
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+    </div>
+</div>

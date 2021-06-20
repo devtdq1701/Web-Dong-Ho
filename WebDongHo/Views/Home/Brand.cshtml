@@ -1,0 +1,17 @@
+﻿@model List<Model.EF.Brand>
+<div class="brand-slider">
+    @foreach (var item in Model)
+    {
+        <div class="item">
+            <div class="item-wrap">
+                <div class="item-img item-height">
+                    <div class="item-img-info">
+                        <a href="/" title="@item.Title" target="_blank" tabindex="-1">
+                            <img style="object-fit:cover" width="600" height="180" src="@item.Logo" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="@item.Title">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

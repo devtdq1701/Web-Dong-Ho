@@ -1,0 +1,75 @@
+﻿@model Model.EF.ProductCategory
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+@section css{
+    <style>
+        .img-custom {
+            width: 200px;
+        }
+    </style>
+}
+@section header{
+    Chi tiết danh mục sản phẩm @Model.ID
+}
+<div>
+    <hr />
+    <table class="table table-striped">
+        <tr>
+            <th scope="row">@Html.DisplayNameFor(model => model.Title)</th>
+            <td>@Html.DisplayFor(model => model.Title)</td>
+        </tr>
+        <tr>
+            <th scope="row">@Html.DisplayNameFor(model => model.Images)</th>
+            <td><img class="img-fluid img-custom" src="@Html.DisplayFor(model => model.Images)" alt=""></td>
+        </tr>
+        <tr>
+            <th scope="row">@Html.DisplayNameFor(model => model.Order)</th>
+            <td>@Html.DisplayFor(model => model.Order)</td>
+        </tr>
+        <tr>
+            <th scope="row">@Html.DisplayNameFor(model => model.MetaKeywords)</th>
+            <td>@Html.DisplayFor(model => model.MetaKeywords)</td>
+        </tr>
+        <tr>
+            <th scope="row">@Html.DisplayNameFor(model => model.MetaDescription)</th>
+            <td>@Html.DisplayFor(model => model.MetaDescription)</td>
+        </tr>
+        <tr>
+            <th scope="row">Trạng thái</th>
+            <td>
+                @{
+                    if (Model.Status == true)
+                    {
+                        <span class="badge badge-pill badge-success">Kích hoạt</span>
+                    }
+                    else
+                    {
+                        <span class="badge badge-pill badge-danger">Huỷ kích hoạt</span>
+                    }
+                }
+            </td>
+        </tr>
+        <tr>
+            <th scope="row">Hiển thị trang chủ</th>
+            <td>
+                @{
+                    if (Model.UpHome == true)
+                    {
+                        <span class="badge badge-pill badge-success">Hiển thị</span>
+                    }
+                    else
+                    {
+                        <span class="badge badge-pill badge-danger">Không hiển thị</span>
+                    }
+                }
+            </td>
+        </tr>
+    </table>
+    <hr />
+</div>
+<p>
+    @Html.ActionLink("Sửa", "Edit", null, new { id = Model.ID }, new { @class = "btn btn-primary btn-icon-split btn-padding" }) |
+    @Html.ActionLink("Trở lại", "Index", null, new { @class = "btn btn-secondary btn-icon-split btn-padding" })
+</p>

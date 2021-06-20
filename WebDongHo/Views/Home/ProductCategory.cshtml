@@ -1,0 +1,10 @@
+﻿@model List<Model.EF.ProductCategory>
+
+<ul id="menu-danh-muc-san-pham-1" class="vertical-megamenu flytheme-menures">
+
+    @foreach (var item in Model)
+    {
+        <li class="menu-xiaomi ya-menu-custom level1"><a href="/@item.MetaTitle-@item.ID" class="item-link"><span class="have-title"><span class="menu-title">@item.Title</span></span></a></li>
+
+    }
+</ul>

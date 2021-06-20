@@ -1,0 +1,113 @@
+﻿@model IEnumerable<Model.EF.UserGroup>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+@section css{
+    <link href="~/Assets/Admin/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+}
+@section js{
+    <!-- Page level plugins -->
+    <script src="~/Assets/Admin/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/Assets/Admin/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+    <!-- Page level custom scripts -->
+    <script src="~/Assets/Admin/js/demo/datatables-demo.js"></script>
+    <script type="text/javascript">
+        function remove() {
+            var $tr = $(this).closest('tr');
+            $tr.remove();
+            location.reload();
+        }
+    </script>
+}
+@section header{
+    Danh sách nhóm user
+}
+
+<p>
+    @Html.ActionLink("Tạo mới", "Create", null, new { @class = "btn btn-success btn-icon-split btn-padding" })
+</p>
+<div class="card shadow mb-4">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Name)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.IsActived)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Description)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.IsDeleted)
+                        </th>
+                        <th>Thao tác</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Name)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Description)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.IsActived)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.IsDeleted)
+                        </th>
+                        <th>Thao tác</th>
+                    </tr>
+                </tfoot>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            <a href="/Admin/UserGroups/Details/@item.ID">@Html.DisplayFor(modelItem => item.Name)</a>
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Description)
+                        </td>
+                        <td>
+                            @{
+                                if (item.IsActived == true)
+                                {
+                                    <span class="badge badge-pill badge-success">Kích hoạt</span>
+                                }
+                                else
+                                {
+                                    <span class="badge badge-pill badge-danger">Chưa kích hoạt</span>
+                                }
+                            }
+                        </td>
+                        <td>
+                            @{
+                                if (item.IsDeleted == true)
+                                {
+                                    <span class="badge badge-pill badge-success">Xoá</span>
+                                }
+                                else
+                                {
+                                    <span class="badge badge-pill badge-danger">Chưa xoá</span>
+                                }
+                            }
+                        </td>
+                        <td style="display:flex">
+                            <a class="btn btn-primary btn-icon-split btn-padding" href="/Admin/UserGroups/Edit/@item.ID"><i class="far fa-edit"></i></a> |
+                            <a class="btn btn-danger btn-icon-split btn-padding" data-ajax="true" data-ajax-complete="remove" data-ajax-confirm="Bạn có muốn xoá bản ghi này ?" data-ajax-method="Delete" href="/Admin/UserGroups/Delete/@item.ID"><i class="far fa-trash-alt"></i></a>
+                        </td>
+                    </tr>
+                }
+
+            </table>
+        </div>
+    </div>
+</div>

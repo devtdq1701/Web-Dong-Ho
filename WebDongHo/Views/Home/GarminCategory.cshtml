@@ -1,0 +1,61 @@
+﻿@model Model.EF.ProductCategory
+@{var sameProducts = (List<Model.EF.Product>)ViewBag.ProductList; }
+<div class="vc_row wpb_row vc_row-fluid" style="position: relative; left: -159.6px; box-sizing: border-box; width: 1519px; padding-left: 159.6px; padding-right: 159.4px;">
+    <div class="wpb_column vc_column_container vc_col-sm-12">
+        <div class="vc_column-inner">
+            <div class="wpb_wrapper">
+                <div class="sw-woo-container-slider responsive-slider woo-slider-childcat">
+                    <div class="block-title clearfix">
+                        @Model.Title
+                    </div>
+                    <div class="resp-slider-container ">
+                        <div class="row">
+                            <div class="left-child col-lg-3 col-md-3">
+                                <a class="img-class" href="/@Model.MetaTitle-@Model.ID" title="@Model.Title"><img width="396" height="540" src="@Model.Images" class="attachment-full size-full" alt=""></a>
+                            </div>
+                            <div class="right-childs col-lg-9 col-md-9 col-sm-12">
+                                <div class="rw-margin">
+                                    <div class="product-slider">
+
+                                        @foreach (var item in sameProducts)
+                                        {
+                                            <div class="item">
+                                                <div class="item-wrap">
+                                                    <div class="item-detail">
+                                                        <div class="item-img products-thumb">
+                                                            <a href="/chi-tiet/@item.MetaTitle-@item.ID" tabindex="-1">
+                                                                <div class="product-thumb-hover"><img width="300" height="300" src="@item.Thumb" class="attachment-shop_catalog size-shop_catalog wp-post-image" alt="@item.Title"></div>
+                                                            </a>
+                                                        </div>
+                                                        <div class="item-content">
+                                                            <div class="reviews-content">
+                                                                <div class="star"></div>
+                                                                <div class="item-number-rating">
+                                                                    0Đánh giá
+                                                                </div>
+                                                            </div>
+                                                            <h4><a href="/chi-tiet/@item.MetaTitle-@item.ID" title="@item.Title" tabindex="-1">@item.Title</a></h4>
+                                                            <div class="item-price">
+                                                                <span>
+                                                                    <span class="woocommerce-Price-amount amount">@item.Price.Value.ToString("N0")&nbsp;<span class="woocommerce-Price-currencySymbol">đ</span></span>
+                                                                </span>
+                                                            </div>
+                                                            <div class="add-info" style="margin-left: 15px;">
+                                                                <button class="button product_type_simple add_to_cart_button ajax_add_to_cart" data-id="@item.ID">Thêm vào giỏ hàng</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

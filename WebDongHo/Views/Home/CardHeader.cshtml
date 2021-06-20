@@ -1,0 +1,10 @@
+﻿@model List<WebDongHo.Models.CartItem>
+<div class="yt-cart pull-right">
+    <div class="mini-cart-header">
+        <div class="top-form top-form-minicart  minicart-product-style pull-right">
+            <div class="top-minicart pull-right">
+                <a class="cart-contents" href="#" title="View your shopping cart"><span class="minicart-number">@Model.Sum(x => x.Quantity)</span> Sản phẩm</a>
+            </div>
+        </div>
+    </div>
+</div>
